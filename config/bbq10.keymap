@@ -88,7 +88,7 @@
                         &mkp LCLK                                                                                                       &mkp RCLK
 //                     |_______________|_______________                 _______________________________                 _______________|_______________|
 //                     | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
-                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC K_BACK   &LGUI(RET)
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC K_BACK   &LG(RET)
 //      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
 //0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
         &td0            &kp COMMA       &kp DOT         &kp P           &kp Y           &kp F           &kp G           &kp C           &kp R           &kp L
