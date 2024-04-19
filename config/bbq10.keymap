@@ -12,77 +12,241 @@
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/ext_power.h>
 
-   
-#define SYM 1
-#define UPPER 2
+#define DEF 0
+#define NUM 1
+#define SYM 2
+#define NAV 3
+#define FUN 4
+#define BLE 5
+#define DISCB 6
 
+//  0  1  2       3      4  5  6
+//  7  8  9  10 11 12 13 14 15 16
+//  17 18 19 20 21 22 23 24 25 26
+//  27 28 29 30 31 32 33 34 35 36
+//     37 38      39     40 41
 
 / {
-    behaviors {
-        td0: tap_dance_0 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <400>;
-            bindings = <&mkp LCLK>, <&bt BT_CLR>;
+    combos {
+        compatible = "zmk,combos";
+        combo_esc {
+            timeout-ms = <50>;
+            key-positions = <12 13>;
+            bindings = <&kp ESC>;
+        };
+        combo_ret {
+            timeout-ms = <50>;
+            key-positions = <13 14>;
+            bindings = <&kp RET>;
+        };
+        combo_tab {
+            timeout-ms = <50>;
+            key-positions = <10 11>;
+            bindings = <&kp TAB>;
+        };
+        combo_bspace {
+            timeout-ms = <50>;
+            key-positions = <33 34>;
+            bindings = <&kp BSPC>;
         };
     };
-    behaviors {
-        hm: homerow_mods {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <500>;
-            bindings = <&out &kp>;
-        };
+        behaviors {
+                td0: tap_dance_0 {
+                     compatible = "zmk,behavior-tap-dance";
+                     #binding-cells = <0>;
+                     tapping-term-ms = <200>;
+                     bindings = <&sl 5>, <&sl 6>;
+                };
+                lht: left_positional_hold_tap {
+                     compatible = "zmk,behavior-hold-tap";
+                     #binding-cells = <2>;
+                     flavor = "tap-preferred";
+                     tapping-term-ms = <300>;
+                     quick-tap-ms = <200>;
+                     require-prior-idle-ms = <125>;
+                     bindings = <&kp>, <&kp>;
+                     //hold-trigger-key-positions = < 12 13 14 15 16 22 23 24 25 26 31 32 33 34 35 36 37 38 39 40 41 >;
+                };
+                rht: right_positional_hold_tap {
+                     compatible = "zmk,behavior-hold-tap";
+                     #binding-cells = <2>;
+                     flavor = "tap-preferred";
+                     tapping-term-ms = <300>;
+                     quick-tap-ms = <200>;
+                     require-prior-idle-ms = <125>;
+                     bindings = <&kp>, <&kp>;
+                     //hold-trigger-key-positions = < 7 8 9 10 11 17 18 19 20 21 27 28 29 30 31 37 38 39 40 41 >;
+                };
     };
+        keymap {
+                compatible = "zmk,keymap";
 
-    keymap {
-        compatible = "zmk,keymap";
+                def_layer {
+                        bindings = <
+                        _______________                                                                                                 _______________
+                       | ShoudlderKey1 |                                                                                               | Shoulderkey2  |
+                        &mkp LCLK                                                                                                       $mkp RCLK
+                       |_______________|_______________                 _______________________________                 _______________|_______________|
+                       | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    $mt ESC KBACK   &kp TAB
+//      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
+//0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
+        &td0            &kp COMMA       &kp DOT         &kp P           &kp Y           &kp F           &kp G           &kp C           &kp R           &kp L
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//12   |13             |14             |15             |16             |17             |18             |19             |20             |21             |22             |
+        &lht LGUI A     &lht LALT O     &lht LCTRL E    &kp U           &kp I           &kp D           &kp H           &rht RCTRL T    &rht RALT N     &rht LGUI S
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//24   |25             |26             |27             |28             |29             |30             |31             |32             |33             |34             |
+        &tog NAV        &kp Q           &kp J           &kp K           &kp X           &kp B           &kp M           &kp W           &kp V           &kp Z
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//                                     |36             |37             |38         SPACEKEY            |40             |41             |
+                                        &tog FUN        &sk LSHFT       &kp SPACE                       &to NUM         &tog SYM
+//                                     |_______________|_______________|_______________________________|_______________|_______________|
+                        >;
+                };
 
-        default_layer {
+                num_layer {
 
-            bindings = <
-//         --------------------------------------------------------------------------------------------------------------------------         
-//         |    Shoulder Key1    |                                                                             |    Shoulder Key2    |     
-// |         Call key      |      Blackberry Key        |    Trackpad    |             Back Key                |             Endcall Key          |
-// |     Q      |     W    |     E    |     R    |      T      |       Y        |       U        |        I        |       O      |      P        |     
-// |     A      |     S    |     D    |     F    |      G      |       H        |       J        |        K        |       L      |      ←        |  
-// |     alt    |     Z    |     X    |     C    |      V      |       B        |       N        |        M        |       $      |    Enter      |   
-//        |         aA     |         0           |           SPACE              |         SYM         |        aA          |       
-//        -----------------------------------------------------------------------------------------------------------------
+                        bindings = <
+                        _______________                                                                                                 _______________
+                       | ShoudlderKey1 |                                                                                               | Shoulderkey2  |
+                        &mkp LCLK                                                                                                       $mkp RCLK
+                       |_______________|_______________                 _______________________________                 _______________|_______________|
+                       | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    $mt ESC KBACK   &kp TAB
+//      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________ 
+//0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
+        &trans          &kp COMMA       &kp DOT         &trans          &soft_off       &kp ASTERISK    &kp N7          &kp N8          &kp N9          &trans
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//12   |13             |14             |15             |16             |17             |18             |19             |20             |21             |22             |
+        &trans          &trans          &trans          &trans          &trans          &kp PLUS        &kp N4          &kp N5          &kp N6          &kp AT
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//24   |25             |26             |27             |28             |29             |30             |31             |32             |33             |34             |
+        &trans          &trans          &trans          &trans          &kp GRAVE       &kp EQUAL       &kp N1          &kp N2          &kp N3          &kp UNDERSCORE
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//                                     |36             |37             |38         SPACEKEY            |40             |41             |
+                                        &trans          &trans          &trans                          &kp N0          &trans 
+//                                     |_______________|_______________|_______________________________|_______________|_______________|
+                        >;
+                };
 
-                 &mkp LCLK                                                                                          &mkp RCLK
-    &kp CLCK                &kp LGUI                            &mkp LCLK                          &mt ESC K_BACK                    &kp TAB
-    &kp Q        &kp W      &kp E       &kp R     &kp T         &kp Y             &kp U            &kp I            &kp O            &kp P
-    &kp A        &kp S      &kp D       &kp F     &kp G         &kp H             &kp J            &kp K            &kp L            &kp BSPC
-    &kp LSHFT    &kp Z      &kp X       &kp C     &kp V         &kp B             &kp N            &kp M            &kp SEMI         &kp ENTER
-    &kp LCTRL               &kp LALT                            &kp SPACE                          &tog SYM                          &tog UPPER
-            >;
-        };
+                sym_layer {
+                        bindings = <
+                        _______________                                                                                                 _______________
+                       | ShoudlderKey1 |                                                                                               | Shoulderkey2  |
+                        &mkp LCLK                                                                                                       $mkp RCLK
+                       |_______________|_______________                 _______________________________                 _______________|_______________|
+                       | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    $mt ESC KBACK   &kp TAB
+//      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
+//0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
+        &trans          &kp POUND       &kp EXCLAMATION &kp SLASH       &kp BACKSLASH   &kp ASTERISK    &kp DOLLAR      &kp TILDE       &kp AMPERSAND   &kp PIPE
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//12   |13             |14             |15             |16             |17             |18             |19             |20             |21             |22             |
+        &lht LGUI LBRC  &lht LALT RBRC  &lht LCTRL LBKT &kp RBKT        &kp DQT         &kp PLUS        &kp COLON       &kp SEMI        &kp QMARK       &kp AT
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//24   |25             |26             |27             |28             |29             |30             |31             |32             |33             |34             |
+        &kp LT          &kp GT          &kp LPAR        &kp RPAR        &kp SQT         &kp EQUAL       &kp PERCENT     &kp CARET       &kp MINUS       &kp UNDERSCORE
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//                                     |36             |37             |38         SPACEKEY            |40             |41             |
+                                        &trans          &trans          &trans                          &trans          &trans 
+//                                     |_______________|_______________|_______________________________|_______________|_______________|
+                        >;
+                };
 
+                nav_layer {
+                        bindings = <
+                        _______________                                                                                                 _______________
+                       | ShoudlderKey1 |                                                                                               | Shoulderkey2  |
+                        &mkp LCLK                                                                                                       $mkp RCLK
+                       |_______________|_______________                 _______________________________                 _______________|_______________|
+                       | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    $mt ESC KBACK   &kp TAB
+//      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
+//0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
+        &none           &none           &kp PG_DN       &kp PG_UP       &none           &none           &none           &kp UP          &none           &kp RIGHT
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//12   |13             |14             |15             |16             |17             |18             |19             |20             |21             |22             |
+        &kp LGUI        &kp LALT        &kp LCTRL       &none           &none           &none           &kp LEFT        &kp DOWN        &kp RIGHT       &none
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//24   |25             |26             |27             |28             |29             |30             |31             |32             |33             |34             |
+        &none           &none           &kp DOWN        &kp UP          &none           &none           &none           &none           &none           &none
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//                                     |36             |37             |38         SPACEKEY            |40             |41             |
+                                        &trans          &trans          &trans                          &trans          &trans 
+//                                     |_______________|_______________|_______________________________|_______________|_______________|
+                        >;
+                };
+                fun_layer {
+                        bindings = <
+                        _______________                                                                                                 _______________
+                       | ShoudlderKey1 |                                                                                               | Shoulderkey2  |
+                        &mkp LCLK                                                                                                       $mkp RCLK
+                       |_______________|_______________                 _______________________________                 _______________|_______________|
+                       | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    $mt ESC KBACK   &kp TAB
+//      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
+//0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
+        &kp F13         &kp F14         &kp F15         &kp F16         &kp C_VOL_UP    &kp F12         &kp F7          &kp F8          &kp F9          &none
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//12   |13             |14             |15             |16             |17             |18             |19             |20             |21             |22             |
+        &kp F17         &kp F18         &kp F19         &kp F20         &kp C_VOL_DN    &kp F11         &kp F4          &kp F5          &kp F6          &none
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//24   |25             |26             |27             |28             |29             |30             |31             |32             |33             |34             |
+        &kp F21         &kp F22         &kp F23         &kp F24         &kp C_MUTE      &kp F10         &kp F1          &kp F2          &kp F3          &none
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//                                     |36             |37             |38         SPACEKEY            |40             |41             |
+                                        &trans          &trans          &trans                          &trans          &trans 
+//                                     |_______________|_______________|_______________________________|_______________|_______________|
+                        >;
+                };
+                ble_layer {
+                        bindings = <
+                        _______________                                                                                                 _______________
+                       | ShoudlderKey1 |                                                                                               | Shoulderkey2  |
+                        &mkp LCLK                                                                                                       $mkp RCLK
+                       |_______________|_______________                 _______________________________                 _______________|_______________|
+                       | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
+                        &kp CLCK        &bootloader                         &mkp LCLK                                    $mt ESC KBACK   &kp TAB
+//      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
+//0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
+        &none           &none           &none           &none           &none           &out OUT_USB     &bt BT_SEL 7    &bt BT_SEL 8    &bt BT_SEL 9   &none
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//12   |13             |14             |15             |16             |17             |18             |19             |20             |21             |22             |
+        &kp LGUI        &kp LALT        &kp LCTRL        &none           &none          &out OUT_BLE    &bt BT_SEL 4    &bt BT_SEL 5    &bt BT_SEL 6    &bt BT_CLR
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//24   |25             |26             |27             |28             |29             |30             |31             |32             |33             |34             |
+        &none           &none           &none           &none           &none           &none           &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &none
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//                                     |36             |37             |38         SPACEKEY            |40             |41             |
+                                        &trans          &trans          &trans                          &trans          &trans 
+//                                     |_______________|_______________|_______________________________|_______________|_______________|
+                        >;
+                };
+                discb_layer {
+                        bindings = <
+                        _______________                                                                                                 _______________
+                       | ShoudlderKey1 |                                                                                               | Shoulderkey2  |
+                        &mkp LCLK                                                                                                       $mkp RCLK
+                       |_______________|_______________                 _______________________________                 _______________|_______________|
+                       | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    $mt ESC KBACK   &kp TAB
+//      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
+//0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
+        &none           &none           &none           &none           &none           &out OUT_USB    &bt BT_DISC 7   &bt BT_DISC 8   &bt BT_DISC 9   &none
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//12   |13             |14             |15             |16             |17             |18             |19             |20             |21             |22             |
+        &kp LGUI        &kp LALT        &kp LCTRL       &none           &none           &out OUT_BLE    &bt BT_DISC 4   &bt BT_DISC 5   &bt BT_DISC 6   &none
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//24   |25             |26             |27             |28             |29             |30             |31             |32             |33             |34             |
+        &none           &none           &none           &none           &none           &none           &bt BT_DISC 1   &bt BT_DISC 2   &bt BT_DISC 3   &bt BT_CLR_ALL
+//     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
+//                                     |36             |37             |38         SPACEKEY            |40             |41             |
+                                        &trans          &trans          &trans                          &trans          &trans 
+//                                     |_______________|_______________|_______________________________|_______________|_______________|
+                       >;
+                };
 
-        sym_layer {
-
-            bindings = <        
-                 &kp C_VOL_UP                                                                                       &kp C_VOL_DN
-    &kp PSCRN               &kp C_AC_SEARCH                     &mkp LCLK                          &kp F5                            &kp F12 
-    &kp HASH     &kp N1     &kp N2      &kp N3    &mt LBKT LPAR &mt RBKT RPAR     &kp UNDER        &kp MINUS        &kp PLUS         &kp AT
-    &kp STAR     &kp N4     &kp N5      &kp N6    &kp SLASH     &kp COLON         &kp SEMI         &kp APOS         &kp DQT          &kp DEL
-    &kp LSHFT    &kp N7     &kp N8      &kp N9    &kp QMARK     &kp EXCL          &kp COMMA        &kp DOT          &kp C_MUTE       &kp ENTER
-    &kp LCTRL               &kp N0                              &kp SPACE                          &tog SYM                          &tog UPPER
-            >;
-        };
-
-        upper_layer {
-
-            bindings = <
-                 &msc SCRL_UP                                                                                       &msc SCRL_DOWN
-    &bt BT_SEL 0            &bt BT_SEL 1                             &td0                           &bt BT_SEL 2                     &bt BT_SEL 3
-    &none        &kp UP     &none       &sys_reset &ext_power EP_TOG &none         &kp LT           &kp GT          &kp PIPE         &kp KP_EQUAL
-    &kp LEFT     &kp DOWN   &kp RIGHT   &none      &kp BSLH          &kp AMPS      &kp LBRC         &kp RBRC        &kp CARET        &kp BSPC
-    &kp LSHFT    &none      &none       &none      &bl BL_DEC        &bl BL_TOG    &bl BL_INC       &none           &bootloader      &kp ENTER
-    &kp LCTRL               &kp LALT                                 &hm OUT_TOG SPACE              &tog SYM                         &tog UPPER
-            >;
-        };
     };
 };
 
