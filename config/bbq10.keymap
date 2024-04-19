@@ -88,7 +88,7 @@
                         &mkp LCLK                                                                                                       &mkp RCLK
 //                     |_______________|_______________                 _______________________________                 _______________|_______________|
 //                     | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
-                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC KBACK   &kp TAB
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC K_BACK   &kp TAB
 //      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
 //0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
         &td0            &kp COMMA       &kp DOT         &kp P           &kp Y           &kp F           &kp G           &kp C           &kp R           &kp L
@@ -113,7 +113,7 @@
                         &mkp LCLK                                                                                                       &mkp RCLK
 //                     |_______________|_______________                 _______________________________                 _______________|_______________|
 //                     | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
-                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC KBACK   &kp TAB
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC K_BACK   &kp TAB
 //      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________ 
 //0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
         &trans          &kp COMMA       &kp DOT         &trans          &soft_off       &kp ASTERISK    &kp N7          &kp N8          &kp N9          &trans
@@ -137,7 +137,7 @@
                         &mkp LCLK                                                                                                       &mkp RCLK
 //                     |_______________|_______________                 _______________________________                 _______________|_______________|
 //                     | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
-                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC KBACK   &kp TAB
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC K_BACK   &kp TAB
 //      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
 //0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
         &trans          &kp POUND       &kp EXCLAMATION &kp SLASH       &kp BACKSLASH   &kp ASTERISK    &kp DOLLAR      &kp TILDE       &kp AMPERSAND   &kp PIPE
@@ -161,7 +161,7 @@
                         &mkp LCLK                                                                                                       &mkp RCLK
 //                     |_______________|_______________                 _______________________________                 _______________|_______________|
 //                     | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
-                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC KBACK   &kp TAB
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC K_BACK   &kp TAB
 //      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
 //0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
         &none           &none           &kp PG_DN       &kp PG_UP       &none           &none           &none           &kp UP          &none           &kp RIGHT
@@ -184,7 +184,7 @@
                         &mkp LCLK                                                                                                       &mkp RCLK
 //                     |_______________|_______________                 _______________________________                 _______________|_______________|
 //                     | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
-                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC KBACK   &kp TAB
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC K_BACK   &kp TAB
 //      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
 //0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
         &kp F13         &kp F14         &kp F15         &kp F16         &kp C_VOL_UP    &kp F12         &kp F7          &kp F8          &kp F9          &none
@@ -207,7 +207,7 @@
                         &mkp LCLK                                                                                                       &mkp RCLK
 //                     |_______________|_______________                 _______________________________                 _______________|_______________|
 //                     | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
-                        &kp CLCK        &bootloader                         &mkp LCLK                                    &mt ESC KBACK   &kp TAB
+                        &kp CLCK        &bootloader                         &mkp LCLK                                    &mt ESC K_BACK   &kp TAB
 //      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
 //0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
         &none           &none           &none           &none           &none           &out OUT_USB     &bt BT_SEL 7    &bt BT_SEL 8    &bt BT_SEL 9   &none
@@ -230,7 +230,7 @@
                         &mkp LCLK                                                                                                       &mkp RCLK
 //                     |_______________|_______________                 _______________________________                 _______________|_______________|
 //                     | Call Key      |  BB Key       |               |           Trackpad            |               | Back Key      | End Call Key  |
-                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC KBACK   &kp TAB
+                        &kp CLCK        &kp LGUI                            &mkp LCLK                                    &mt ESC K_BACK   &kp TAB
 //      _______________|_______________|_______________|_______________|_______________ _______________|_______________|_______________|_______________|_______________
 //0    |1              |2              |3              |4              |5              |6              |7              |8              |9              |10             |
         &none           &none           &none           &none           &none           &out OUT_USB    &bt BT_DISC 7   &bt BT_DISC 8   &bt BT_DISC 9   &none
