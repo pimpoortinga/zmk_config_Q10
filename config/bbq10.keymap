@@ -213,7 +213,7 @@
         &none           &none           &none           &none           &none           &out OUT_USB     &bt BT_SEL 7    &bt BT_SEL 8    &bt BT_SEL 9   &none
 //     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
 //12   |13             |14             |15             |16             |17             |18             |19             |20             |21             |22             |
-        &kp LGUI        &kp LALT        &kp LCTRL        &none           &none          &out OUT_BLE    &bt BT_SEL 4    &bt BT_SEL 5    &bt BT_SEL 6    &bt BT_CLR
+        &kp LGUI        &kp LALT        &kp LCTRL       &none           &none           &out OUT_BLE    &bt BT_SEL 4    &bt BT_SEL 5    &bt BT_SEL 6    &bt BT_CLR
 //     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
 //24   |25             |26             |27             |28             |29             |30             |31             |32             |33             |34             |
         &none           &none           &none           &none           &none           &none           &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &none
@@ -239,7 +239,7 @@
         &kp LGUI        &kp LALT        &kp LCTRL       &none           &none           &out OUT_BLE    &bt BT_DISC 4   &bt BT_DISC 5   &bt BT_DISC 6   &none
 //     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
 //24   |25             |26             |27             |28             |29             |30             |31             |32             |33             |34             |
-        &none           &none           &none           &none           &none           &none           &bt BT_DISC 1   &bt BT_DISC 2   &bt BT_DISC 3   &none         
+        &none           &none           &none           &none           &none           &none           &bt BT_DISC 1   &bt BT_DISC 2   &bt BT_DISC 3   &bttt BT_CLR_ALL
 //     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
 //                                     |36             |37             |38         SPACEKEY            |40             |41             |
                                         &trans          &trans          &trans                          &trans          &trans 
