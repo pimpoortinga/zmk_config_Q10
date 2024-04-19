@@ -57,12 +57,6 @@
                      tapping-term-ms = <200>;
                      bindings = <&sl 5>, <&sl 6>, <&kp CAPS>;
                 };
-                td1: tap_dance_1 {
-                     compatible = "zmk,behavior-tap-dance";
-                     #binding-cells = <0>;
-                     tapping-term-ms = <200>;
-                     bindings = <&sk LSHFT >, <&kp LSHFT >;
-                };
                 lht: left_positional_hold_tap {
                      compatible = "zmk,behavior-hold-tap";
                      #binding-cells = <2>;
@@ -106,7 +100,7 @@
         &tog NAV        &kp Q           &kp J           &kp K           &kp X           &kp B           &kp M           &kp W           &kp V           &kp Z
 //     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
 //                                     |36             |37             |38         SPACEKEY            |40             |41             |
-                                        &tog FUN        &td1            &kp SPACE                       &tog SYM         &tog NUM
+                                        &kp BSPC        &sk SHFT        &kp SPACE                       &tog SYM         &tog NUM
 //                                     |_______________|_______________|_______________________________|_______________|_______________|
                         >;
                 };
@@ -131,7 +125,7 @@
         &none           &trans          &trans          &trans          &kp GRAVE       &kp EQUAL       &kp N1          &kp N2          &kp N3          &kp UNDERSCORE
 //     |_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|_______________|
 //                                     |36             |37             |38         SPACEKEY            |40             |41             |
-                                        &trans          &trans          &trans                          &kp N0          &tog NUM
+                                        &tog FUN        &trans          &trans                          &kp N0          &tog NUM
 //                                     |_______________|_______________|_______________________________|_______________|_______________|
                         >;
                 };
